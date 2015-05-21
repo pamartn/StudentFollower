@@ -1,7 +1,12 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,55 +17,44 @@ import javax.swing.JTextField;
 public class NavigationBar extends JPanel {
 
 	
+	private Fenetre fenetre;
+	private JButton home;
 	
-	
-	public NavigationBar() {
+	public NavigationBar(Fenetre f) {
 		super();
-		setLayout(new GridBagLayout());
+		this.fenetre = f;
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		GridBagConstraints c = new GridBagConstraints();
-		
-		c.fill = GridBagConstraints.WEST;
-		c.anchor = GridBagConstraints.WEST;
-		c.gridwidth = 1;
-		c.weightx = 1;
-		c.gridx = 0;
-		c.gridy = 0;
+		JPanel p = new JPanel();
+		p.setLayout(new BorderLayout());
 		ImageIcon img = new ImageIcon("res/homeicon.png");
-		add(new JButton(new ImageIcon(img.getImage().getScaledInstance( 40, 40, java.awt.Image.SCALE_SMOOTH ))), c);
+		home = new JButton(new ImageIcon(img.getImage().getScaledInstance( 40, 40, java.awt.Image.SCALE_SMOOTH )));
+		home.addActionListener(new CustomActionListener());
+		p.add(home, BorderLayout.WEST);
 		
-		c.fill = GridBagConstraints.CENTER;
-		c.anchor = GridBagConstraints.CENTER;
-		c.gridwidth = 1;
-		c.weightx = 1;
-		c.gridx = 0;
-		c.gridy = 1;
-		add(new JLabel("Gery Casiez"), c);
-
+		p.add(new JLabel("Gery Casiez"), BorderLayout.CENTER);
+		add(p);
 		
 		JTextField textField = new JTextField();
+		textField.setBorder(BorderFactory.createLineBorder(Color.RED, 10));
+		textField.setFont(new CustomFont());
 		textField.setText("search");
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridwidth = 1;
-		c.gridx = 0;
-		c.gridy = 2;
-		c.insets = new Insets(10,0,0,0);  //top padding
-		add(textField, c);
+		add(textField);
 		
-		
-		c.fill = GridBagConstraints.CENTER;
-		c.anchor = GridBagConstraints.CENTER;
-		c.gridwidth = 1;
-		c.gridx = 0;
-		c.gridy = 3;
-		c.insets = new Insets(10,0,0,0);  //top padding
-		add(new JLabel("IHM - Groupe J - 13H30 - 15H30"), c);
-		
+
+		add(new JLabel("IHM - Groupe J - 13H30 - 15H30"));
 		
 		
 		setVisible(true);
 	}
 
-	
+	public class CustomActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			fenetre.changeCard(fenetre.cardsName[0]);
+		}
+		
+	}
 
 }
