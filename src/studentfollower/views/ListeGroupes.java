@@ -1,4 +1,4 @@
-package studentfollower_views;
+package studentfollower.views;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;

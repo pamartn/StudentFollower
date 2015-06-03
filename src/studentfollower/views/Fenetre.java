@@ -1,4 +1,4 @@
-package studentfollower_views;
+package studentfollower.views;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -18,7 +18,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import studentfollower_modele.SFConnection;
+import studentfollower.modele.SFConnection;
+import studentfollower.modele.dao.DAOFactory;
 
 
 
@@ -102,6 +103,9 @@ public class Fenetre extends JFrame {
 	
 	 public static void main( String args[] )
 	  {
+		 
+		 
+		 
 	    Connection c = null;
 	    Statement stmt = null;
 	    try {
@@ -127,13 +131,36 @@ public class Fenetre extends JFrame {
 	      System.out.println(req);
 	      
 	      stmt.executeUpdate(req.toString());
+	      
+	      try{
+	    	  FileReader reader = new FileReader(new File("res/fullBase.sql"));
+	    	 BufferedReader  f = new BufferedReader(reader);
+	    	 String s = ""; 
+	    	 while((s = f.readLine()) != null){
+	    		 req.append(s + "\n");
+	    	 }
+	      } catch(Exception e){
+	    	  System.out.println("Problem loading file");
+	      }
+	      System.out.println(req);
+	      stmt.executeUpdate(req.toString());
+
+		  System.out.println("Table created successfully");
+		    
+		    
+		    
 	      stmt.close();
-	      c.close();
+	      
+
+		    System.out.println(DAOFactory.getEtudiantDAO().find(1));
+	      
 	    } catch ( Exception e ) {
 	      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	      System.exit(0);
 	    }
-	    System.out.println("Table created successfully");
+	    
+	
+	    
 	  }
 
 }

@@ -1,4 +1,4 @@
-package studentfollower_modele;
+package studentfollower.modele;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

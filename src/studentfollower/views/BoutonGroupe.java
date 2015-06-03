@@ -1,4 +1,4 @@
-package studentfollower_views;
+package studentfollower.views;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 

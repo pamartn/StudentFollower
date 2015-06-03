@@ -1,4 +1,4 @@
-package studentfollower_modele;
+package studentfollower.modele.dao;
 import java.sql.Connection;
 
 
