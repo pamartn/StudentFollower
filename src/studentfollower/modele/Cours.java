@@ -13,6 +13,9 @@ public class Cours {
 		setNum_cours(num_cours);
 		setMatiere(matiere);
 		setSalle(salle);
+		setGroupe(groupe);
+		setProf(prof);
+		setHoraire(horaire);
 	}
 
 

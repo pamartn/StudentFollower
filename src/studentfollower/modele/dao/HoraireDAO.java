@@ -3,6 +3,9 @@ package studentfollower.modele.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import studentfollower.modele.Horaire;
 import studentfollower.modele.Professeur;
@@ -35,7 +38,10 @@ public class HoraireDAO extends DAO<Horaire> {
 		try{
 			ResultSet result = this.connect.createStatement(ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Horaire WHERE num_horaire=" + id);
 			if(result.next()){
-				horaire = new Horaire(id, result.getDate("date_debut"), result.getDate("date_fin"));
+				SimpleDateFormat dateDebut = new SimpleDateFormat(result.getString("date_debut"));
+				SimpleDateFormat dateFin = new SimpleDateFormat(result.getString("date_fin"));
+				
+				horaire = new Horaire(id, dateDebut, dateFin);
 			}
 				
 		} catch(SQLException e){

@@ -1,8 +1,6 @@
 package studentfollower.views;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,26 +13,27 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import studentfollower.controller.FenetreController;
+import studentfollower.modele.Professeur;
 
-public class NavigationBar extends JPanel {
+
+public class NavigationBarView extends JPanel {
 
 	
-	private Fenetre fenetre;
 	private JButton home;
 	private JLabel nom;
 	
-	public NavigationBar(Fenetre f) {
+	public NavigationBarView(Professeur prof,ActionListener l) {
 		super();
-		this.fenetre = f;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JPanel p = new JPanel();
 		p.setLayout(new BorderLayout());
 		ImageIcon img = new ImageIcon("res/homeicon.png");
 		home = new JButton(new ImageIcon(img.getImage().getScaledInstance( 40, 40, java.awt.Image.SCALE_SMOOTH )));
-		home.addActionListener(new CustomActionListener());
+		home.addActionListener(l);
 		p.add(home, BorderLayout.WEST);
 		nom = new JLabel("Gery Casiez", SwingConstants.CENTER);
-		nom.setFont(nom.getFont().deriveFont(20f * (float)Fenetre.scale));
+		nom.setFont(nom.getFont().deriveFont(20f * (float)FenetreController.scale));
 		p.add(nom, BorderLayout.CENTER);
 		
 		add(p);
@@ -52,13 +51,10 @@ public class NavigationBar extends JPanel {
 		setVisible(true);
 	}
 
-	public class CustomActionListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			fenetre.changeCard(fenetre.cardsName[0]);
-		}
+	public void refreshUI(){
 		
 	}
+	
+	
 
 }

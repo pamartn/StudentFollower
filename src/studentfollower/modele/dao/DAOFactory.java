@@ -33,7 +33,7 @@ public class DAOFactory {
 		    try {
 		      //Class.forName("org.sqlite.JDBC");
 		     
-		    Connection	c = SFConnection.getInstance();
+		    Connection	c = conn;
 		      System.out.println("Opened database successfully");
 
 		      stmt = c.createStatement();
@@ -53,7 +53,9 @@ public class DAOFactory {
 		      System.out.println(req);
 		      
 		      stmt.executeUpdate(req.toString());
-		      
+		      stmt.close();
+
+		      stmt = c.createStatement();
 		      try{
 		    	  FileReader reader = new FileReader(new File("res/fullBase.sql"));
 		    	 BufferedReader  f = new BufferedReader(reader);
@@ -67,12 +69,8 @@ public class DAOFactory {
 		      System.out.println(req);
 		      stmt.executeUpdate(req.toString());
 
-			  System.out.println("Table created successfully");
-			    
-			    
-			    
-		      stmt.close();
-		      
+			  System.out.println("Table created and fulled succesfully");
+			   stmt.close();
 			    
 		      
 		    } catch ( Exception e ) {

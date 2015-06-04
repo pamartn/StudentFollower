@@ -38,14 +38,16 @@ public class CoursDAO extends DAO<Cours> {
 						result.getString("matiere"), 
 						result.getString("salle"), 
 						DAOFactory.getGroupeDAO().find(result.getInt("num_groupe")),
-						DAOFactory.getProfesseurDAO().find(result.getInt("num_professeur")),
+						DAOFactory.getProfesseurDAO().find(result.getInt("num_prof")),
 						DAOFactory.getHoraireDAO().find(result.getInt("num_horaire")));
 			
 			}
 				
-		} catch(SQLException e){
+		} catch(Exception e){
 			e.printStackTrace();
 		}
+
+		System.out.println(cours);
 		return cours;	
 	}
 
