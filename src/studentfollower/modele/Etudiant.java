@@ -15,6 +15,11 @@ public class Etudiant {
 		setSexe(sexe);
 		setGroupe(groupe);
 	}
+	
+	public String toString(){
+		return "Etudiant id : " + num_etu + " / "
+				+ nom + " " + prenom + " / " + groupe;
+	}
 
 	public int getNum_etu() {
 		return num_etu;

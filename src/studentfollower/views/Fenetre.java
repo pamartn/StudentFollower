@@ -153,6 +153,7 @@ public class Fenetre extends JFrame {
 	      
 
 		    System.out.println(DAOFactory.getEtudiantDAO().find(1));
+		    
 	      
 	    } catch ( Exception e ) {
 	      System.err.println( e.getClass().getName() + ": " + e.getMessage() );

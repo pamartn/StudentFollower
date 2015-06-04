@@ -10,6 +10,10 @@ public class Groupe {
 		setNom(nom);
 	}
 	
+	public String toString(){
+		return "Groupe id : " + num_groupe + " / " + nom;
+	}
+	
 	public int getNum_groupe() {
 		return num_groupe;
 	}
