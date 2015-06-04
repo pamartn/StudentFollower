@@ -32,7 +32,7 @@ public class NavigationBarView extends JPanel {
 		home = new JButton(new ImageIcon(img.getImage().getScaledInstance( 40, 40, java.awt.Image.SCALE_SMOOTH )));
 		home.addActionListener(l);
 		p.add(home, BorderLayout.WEST);
-		nom = new JLabel("Gery Casiez", SwingConstants.CENTER);
+		nom = new JLabel(prof.getPrenom() +" "+ prof.getNom(), SwingConstants.CENTER);
 		nom.setFont(nom.getFont().deriveFont(20f * (float)FenetreController.scale));
 		p.add(nom, BorderLayout.CENTER);
 		

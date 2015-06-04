@@ -11,6 +11,6 @@ INSERT INTO Etudiant(nom,prenom,sexe,num_groupe) VALUES("Sonia","Hachemi",1,1);
 INSERT INTO Professeur(prenom, nom) VALUES ("Gery","Casiez");
 
 
-INSERT INTO Horaire(date_debut,date_fin) VALUES ('2015-06-04 10:00:00','2015-06-04 12:00:00');
+INSERT INTO Horaire(date_debut,date_fin) VALUES (datetime(), datetime());
 
 INSERT INTO Cours(matiere,salle,num_groupe,num_prof,num_horaire) VALUES ("IHM","4A02",1,1,1);

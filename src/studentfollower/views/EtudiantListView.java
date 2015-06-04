@@ -3,6 +3,7 @@ package studentfollower.views;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
 import studentfollower.modele.Cours;
@@ -23,11 +24,16 @@ public class EtudiantListView extends ListView {
 		
 		listBoutons = new ArrayList<BoutonEtudiant>();
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		System.out.println(cours.getGroupe());
-		for(Etudiant e : DAOFactory.getEtudiantDAO().findAllByGroupe(cours.getGroupe())){
-			BoutonEtudiant b = new BoutonEtudiant(e.getNom() + " " + e.getPrenom(), true);
-			listBoutons.add(b);
-			add(b);
+		
+		if(cours != null){
+			for(Etudiant e : DAOFactory.getEtudiantDAO().findAllByGroupe(cours.getGroupe())){
+				BoutonEtudiant b = new BoutonEtudiant(e.getNom() + " " + e.getPrenom(), true);
+				listBoutons.add(b);
+				add(b);
+			}
+		} else {
+			add(new JLabel("Vous n'avez pas cours"));
 		}
+		
 	}
 }

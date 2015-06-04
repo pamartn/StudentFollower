@@ -25,7 +25,7 @@ public class FooterBarView extends JPanel {
 		return groupes;
 	}
 
-	public JButton getBoutonHoraire() {
+	public JButton getBoutonCours() {
 		return cours;
 	}
 

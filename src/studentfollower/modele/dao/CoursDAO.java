@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import studentfollower.modele.Cours;
 import studentfollower.modele.Etudiant;
+import studentfollower.modele.Horaire;
+import studentfollower.modele.Professeur;
 
 public class CoursDAO extends DAO<Cours> {
 
@@ -48,6 +50,27 @@ public class CoursDAO extends DAO<Cours> {
 		}
 
 		System.out.println(cours);
+		return cours;	
+	}
+
+	public Cours findCurrentCours(Professeur prof) {
+		Cours cours = null;
+		Horaire h = DAOFactory.getHoraireDAO().getCurrentHoraire();
+		try{
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Cours WHERE num_prof=" + prof + " AND num_horaire=" + h.getNum_horaire());
+			if(result.next()){
+				cours = new Cours(result.getInt("num_cours"), 
+						result.getString("matiere"), 
+						result.getString("salle"), 
+						DAOFactory.getGroupeDAO().find(result.getInt("num_groupe")),
+						DAOFactory.getProfesseurDAO().find(result.getInt("num_prof")),
+						DAOFactory.getHoraireDAO().find(result.getInt("num_horaire")));
+			
+			}
+				
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 		return cours;	
 	}
 

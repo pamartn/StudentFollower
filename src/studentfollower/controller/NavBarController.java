@@ -15,10 +15,9 @@ public class NavBarController {
 	
 	
 	
-	public NavBarController(FenetreController f, int idProf) {
+	public NavBarController(FenetreController f, Professeur prof) {
 		this.fenetreController = f;
-		Professeur professeur = DAOFactory.getProfesseurDAO().find(idProf);
-		navBar = new NavigationBarView(professeur, new CustomActionListener());
+		navBar = new NavigationBarView(prof, new CustomActionListener());
 	}
 	
 	public NavigationBarView getView(){
@@ -29,7 +28,7 @@ public class NavBarController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			fenetreController.actionCours();
+			fenetreController.getMiddleView().actionAcceuil();
 		}
 		
 	}

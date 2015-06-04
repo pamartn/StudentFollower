@@ -3,6 +3,7 @@ package studentfollower.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import studentfollower.modele.Professeur;
 import studentfollower.views.FooterBarView;
 
 public class FooterBarController {
@@ -11,7 +12,7 @@ public class FooterBarController {
 	FooterBarView footerBarView;
 	FenetreController fenetreController;
 	
-	public FooterBarController(FenetreController f){
+	public FooterBarController(FenetreController f, Professeur prof){
 		footerBarView = new FooterBarView(new CustomActionListener());
 		fenetreController = f;
 	}
@@ -26,8 +27,8 @@ public class FooterBarController {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == footerBarView.getBoutonGroupe()){
 				fenetreController.getMiddleView().actionGroupe();
-			} else if (e.getSource() ==  footerBarView.getBoutonHoraire()){
-				fenetreController.getMiddleView().actionHoraire();
+			} else if (e.getSource() ==  footerBarView.getBoutonCours()){
+				fenetreController.getMiddleView().actionCours();
 			} 
 		}
 		

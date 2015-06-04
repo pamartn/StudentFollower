@@ -4,6 +4,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
+import studentfollower.modele.Professeur;
 import studentfollower.modele.dao.DAOFactory;
 import studentfollower.views.Fenetre;
 
@@ -18,9 +19,11 @@ public class FenetreController {
 	
 	public FenetreController() {
 		fenetre = new Fenetre((int)(scale*320.0), (int)(scale*480.0));
-		navBarController = new NavBarController(this,1);
-		midViewControl = new MiddleViewController();
-		footerBarControl = new FooterBarController(this);
+		Professeur prof = DAOFactory.getProfesseurDAO().find(1);
+		navBarController = new NavBarController(this,prof);
+		midViewControl = new MiddleViewController(prof);
+		footerBarControl = new FooterBarController(this, prof);
+		
 		
 		fenetre.loadUI(navBarController.getView(),midViewControl.getView(), footerBarControl.getView());
 	}

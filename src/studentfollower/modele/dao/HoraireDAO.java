@@ -49,6 +49,27 @@ public class HoraireDAO extends DAO<Horaire> {
 		}
 		return horaire;
 	}
+
+	public Horaire getCurrentHoraire() {
+		Horaire horaire = null;
+		String timeStamp = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar.getInstance().getTime());
+		System.out.println(timeStamp);
+		try{
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("SELECT * FROM Horaire WHERE Datetime('"+timeStamp+"') >= date_debut AND Datetime('"+timeStamp+"') <= date_fin");
+			if(result.next()){
+				System.out.println("next");
+				SimpleDateFormat dateDebut = new SimpleDateFormat(result.getString("date_debut"));
+				SimpleDateFormat dateFin = new SimpleDateFormat(result.getString("date_fin"));
+				
+				horaire = new Horaire(result.getInt("num_horaire"), dateDebut, dateFin);
+			}
+				
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
+		return horaire;
+	}
 	
 	
 }
