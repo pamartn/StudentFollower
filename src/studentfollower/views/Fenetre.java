@@ -2,6 +2,7 @@ package studentfollower.views;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -39,7 +40,7 @@ public class Fenetre extends JFrame {
 		
 		add(new NavigationBar(this), BorderLayout.NORTH);
 		
-		Horaire h = new Horaire(new Date(2015, 10, 22, 10, 30), new Date(2015, 10, 22, 12, 00));
+		//Horaire h = new Horaire(new Date(2015, 10, 22, 10, 30), new Date(2015, 10, 22, 12, 00));
 		
 		center = new JPanel();
 		centerLayout = new CardLayout();
@@ -95,73 +96,11 @@ public class Fenetre extends JFrame {
 	/**
 	 * @param args
 	 */
-	/*
+	
 	public static void main(String[] args) {
+		DAOFactory.initDB();
 		scale = (double)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/1280.0;
 		new Fenetre((int)(scale*320.0), (int)(scale*480.0));
-	}*/
-	
-	 public static void main( String args[] )
-	  {
-		 
-		 
-		 
-	    Connection c = null;
-	    Statement stmt = null;
-	    try {
-	      //Class.forName("org.sqlite.JDBC");
-	     
-	    	c = SFConnection.getInstance();
-	      System.out.println("Opened database successfully");
-
-	      stmt = c.createStatement();
-	      StringBuilder req = new StringBuilder();
-	      
-	      try{
-	    	  FileReader reader = new FileReader(new File("res/createBase.sql"));
-	    	 BufferedReader  f = new BufferedReader(reader);
-	    	 String s = ""; 
-	    	 while((s = f.readLine()) != null){
-	    		 req.append(s + "\n");
-	    	 }
-	    	  
-	      } catch(Exception e){
-	    	  System.out.println("Problem loading file");
-	      }
-	      System.out.println(req);
-	      
-	      stmt.executeUpdate(req.toString());
-	      
-	      try{
-	    	  FileReader reader = new FileReader(new File("res/fullBase.sql"));
-	    	 BufferedReader  f = new BufferedReader(reader);
-	    	 String s = ""; 
-	    	 while((s = f.readLine()) != null){
-	    		 req.append(s + "\n");
-	    	 }
-	      } catch(Exception e){
-	    	  System.out.println("Problem loading file");
-	      }
-	      System.out.println(req);
-	      stmt.executeUpdate(req.toString());
-
-		  System.out.println("Table created successfully");
-		    
-		    
-		    
-	      stmt.close();
-	      
-
-		    System.out.println(DAOFactory.getEtudiantDAO().find(1));
-		    
-	      
-	    } catch ( Exception e ) {
-	      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-	      System.exit(0);
-	    }
-	    
-	
-	    
-	  }
+	}
 
 }

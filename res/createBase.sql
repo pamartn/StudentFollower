@@ -50,3 +50,18 @@ CREATE TABLE IF NOT EXISTS Groupe (
 	num_groupe integer PRIMARY KEY AUTOINCREMENT,
 	nom_groupe VARCHAR(20)
 );
+
+CREATE TABLE IF NOT EXISTS Retard (
+	num_cours integer,
+	num_etu integer,
+	minutes integer,
+	PRIMARY KEY(num_etu,num_cours)
+);
+CREATE TABLE IF NOT EXISTS Absence (
+	num_cours integer,
+	num_etu integer,
+	PRIMARY KEY(num_etu,num_cours)
+);
+
+
+

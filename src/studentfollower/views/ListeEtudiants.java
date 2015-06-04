@@ -13,7 +13,6 @@ public class ListeEtudiants extends JPanel {
 	
 	private String matiere;
 	private char groupe;
-	private Horaire horaire;
 	ArrayList<BoutonEtudiant> listBoutons;
 	String[] nomsEtu;
 	JScrollPane scroll;
