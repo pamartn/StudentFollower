@@ -21,7 +21,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import com.sun.glass.ui.Window;
 
 import studentfollower.modele.SFConnection;
 import studentfollower.modele.dao.DAOFactory;
