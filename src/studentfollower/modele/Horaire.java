@@ -1,17 +1,16 @@
 package studentfollower.modele;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class Horaire {
 
 	private int num_horaire;
-	private SimpleDateFormat date_debut;
-	private SimpleDateFormat date_fin;
+	private Date date_debut;
+	private Date date_fin;
 	
 	
-	public Horaire(int num_horaire, SimpleDateFormat dateDebut,SimpleDateFormat dateFin){
+	public Horaire(int num_horaire, Date dateDebut,Date dateFin){
 		setNum_horaire(num_horaire);
 		setDate_debut(dateDebut);
 		setDate_fin(dateFin);
@@ -27,22 +26,22 @@ public class Horaire {
 	}
 
 
-	public SimpleDateFormat getDate_debut() {
+	public Date getDate_debut() {
 		return date_debut;
 	}
 
 
-	public void setDate_debut(SimpleDateFormat dateDebut) {
+	public void setDate_debut(Date dateDebut) {
 		this.date_debut = dateDebut;
 	}
 
 
-	public SimpleDateFormat getDate_fin() {
+	public Date getDate_fin() {
 		return date_fin;
 	}
 
 
-	public void setDate_fin(SimpleDateFormat dateFin) {
+	public void setDate_fin(Date dateFin) {
 		this.date_fin = dateFin;
 	}
 }

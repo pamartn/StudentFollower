@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import studentfollower.modele.SFConnection;
@@ -75,6 +76,11 @@ public class DAOFactory {
 		      
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+		      try {
+				SFConnection.getInstance().close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		      System.exit(0);
 		    }
 	}

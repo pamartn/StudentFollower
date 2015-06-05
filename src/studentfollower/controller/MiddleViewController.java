@@ -17,6 +17,7 @@ public class MiddleViewController {
 	public MiddleViewController(Professeur prof){
 		middleView = new MiddleView();
 		Cours cours = DAOFactory.getCoursDAO().findCurrentCours(prof);
+		System.out.println(cours);
 		etudiantListController = new EtudiantListController(cours);
 		groupeListController = new GroupeListController(DAOFactory.getProfesseurDAO().find(1));
 		coursListController = new CoursListController(DAOFactory.getProfesseurDAO().find(1));

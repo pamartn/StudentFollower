@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -20,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import com.sun.glass.ui.Window;
+
 import studentfollower.modele.SFConnection;
 import studentfollower.modele.dao.DAOFactory;
 
@@ -30,11 +33,12 @@ public class Fenetre extends JFrame {
 	private CardLayout centerLayout;
 	public String[] cardsName = new String[]{"etudiants","cours","groupes","profil","recherche"};
 	
-	public Fenetre(int largeur, int hauteur) {
+	public Fenetre(int largeur, int hauteur, WindowListener l) {
 		super("Student Follower");
 		setPreferredSize(new Dimension(largeur, hauteur));
 		pack();
 		setVisible(true);
+		addWindowListener(l);
 	}
 
 	public void loadUI(NavigationBarView navigationBar, MiddleView middleView, FooterBarView footerBar) {
