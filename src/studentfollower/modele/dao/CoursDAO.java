@@ -56,7 +56,6 @@ public class CoursDAO extends DAO<Cours> {
 	public Cours findCurrentCours(Professeur prof) {
 		Cours cours = null;
 		Horaire h = DAOFactory.getHoraireDAO().getCurrentHoraire();
-		System.out.println(h.getNum_horaire());
 		try{
 			ResultSet result = this.connect.createStatement(ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Cours WHERE num_prof=" + prof.getNum_prof() + " AND num_horaire=" + h.getNum_horaire());
 			if(result.next()){
