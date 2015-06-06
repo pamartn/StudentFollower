@@ -8,7 +8,6 @@ import java.util.List;
 
 import studentfollower.modele.Etudiant;
 import studentfollower.modele.Groupe;
-import studentfollower.views.ListeEtudiants;
 
 public class EtudiantDAO extends DAO<Etudiant> {
 

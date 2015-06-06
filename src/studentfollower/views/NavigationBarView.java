@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 
 import studentfollower.controller.FenetreController;
 import studentfollower.modele.Professeur;
+import studentfollower.views.components.CustomFont;
 
 
 public class NavigationBarView extends JPanel {

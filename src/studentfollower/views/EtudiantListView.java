@@ -10,6 +10,7 @@ import studentfollower.modele.Cours;
 import studentfollower.modele.Etudiant;
 import studentfollower.modele.Groupe;
 import studentfollower.modele.dao.DAOFactory;
+import studentfollower.views.components.BoutonEtudiant;
 
 public class EtudiantListView extends ListView {
 
@@ -26,7 +27,8 @@ public class EtudiantListView extends ListView {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		if(cours != null){
-			for(Etudiant e : DAOFactory.getEtudiantDAO().findAllByGroupe(cours.getGroupe())){
+			ArrayList<Etudiant> etudiants = (ArrayList<Etudiant>) DAOFactory.getEtudiantDAO().findAllByGroupe(cours.getGroupe());
+			for(Etudiant e : etudiants){
 				BoutonEtudiant b = new BoutonEtudiant(e.getNom() + " " + e.getPrenom(), true);
 				listBoutons.add(b);
 				add(b);

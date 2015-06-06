@@ -1,4 +1,4 @@
-package studentfollower.views;
+package studentfollower.views.components;
 import java.awt.Font;
 
 
