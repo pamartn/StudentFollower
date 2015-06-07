@@ -5,11 +5,9 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.SQLException;
 
-import javax.swing.JPanel;
-
+import studentfollower.modele.Cours;
 import studentfollower.modele.Professeur;
 import studentfollower.modele.SFConnection;
-import studentfollower.modele.dao.DAO;
 import studentfollower.modele.dao.DAOFactory;
 import studentfollower.views.Fenetre;
 
@@ -22,12 +20,15 @@ public class FenetreController {
 	
 	public static double scale = 1;
 	
+	private Professeur currentProf;
+	
 	public FenetreController() {
 		fenetre = new Fenetre((int)(scale*320.0), (int)(scale*480.0), new FenetreListener());
-		Professeur prof = DAOFactory.getProfesseurDAO().find(1);
-		navBarController = new NavBarController(this,prof);
-		midViewControl = new MiddleViewController(prof);
-		footerBarControl = new FooterBarController(this, prof);
+		currentProf = DAOFactory.getProfesseurDAO().find(1);
+		Cours cours = DAOFactory.getCoursDAO().findCurrentCours(currentProf);
+		midViewControl = new MiddleViewController(cours, currentProf, this);
+		navBarController = new NavBarController(this,cours, currentProf);
+		footerBarControl = new FooterBarController(this);
 		
 		
 		fenetre.loadUI(navBarController.getView(),midViewControl.getView(), footerBarControl.getView());
@@ -50,7 +51,9 @@ public class FenetreController {
 		new FenetreController();
 	}
 
-
+	public NavBarController getNavBar(){
+		return navBarController;
+	}
 
 	public MiddleViewController getMiddleView() {
 		return midViewControl;

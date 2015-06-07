@@ -44,4 +44,11 @@ public class Horaire {
 	public void setDate_fin(Date dateFin) {
 		this.date_fin = dateFin;
 	}
+
+	public String getHeureFin() {
+		return date_fin.getHours() + ":" +date_fin.getMinutes();
+	}
+	public String getHeureDebut() {
+		return date_debut.getHours() +":"+ date_debut.getMinutes();
+	}
 }

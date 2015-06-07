@@ -41,8 +41,7 @@ public class EtudiantDAO extends DAO<Etudiant> {
 			
 			}
 				
-		} catch(SQLException e){
-			e.printStackTrace();
+		} catch(Exception e){
 		}
 		return etu;	
 	}
@@ -61,8 +60,7 @@ public class EtudiantDAO extends DAO<Etudiant> {
 			
 			}
 				
-		} catch(SQLException e){
-			e.printStackTrace();
+		} catch(Exception e){
 		}
 		return listEtu;	
 	}

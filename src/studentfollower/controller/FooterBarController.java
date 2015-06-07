@@ -12,7 +12,7 @@ public class FooterBarController {
 	FooterBarView footerBarView;
 	FenetreController fenetreController;
 	
-	public FooterBarController(FenetreController f, Professeur prof){
+	public FooterBarController(FenetreController f){
 		footerBarView = new FooterBarView(new CustomActionListener());
 		fenetreController = f;
 	}
@@ -28,6 +28,7 @@ public class FooterBarController {
 			if(e.getSource() == footerBarView.getBoutonGroupe()){
 				fenetreController.getMiddleView().actionGroupe();
 			} else if (e.getSource() ==  footerBarView.getBoutonCours()){
+				fenetreController.getMiddleView().refreshListCours(null);
 				fenetreController.getMiddleView().actionCours();
 			} 
 		}

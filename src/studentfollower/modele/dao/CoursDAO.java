@@ -3,9 +3,11 @@ package studentfollower.modele.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import studentfollower.modele.Cours;
 import studentfollower.modele.Etudiant;
+import studentfollower.modele.Groupe;
 import studentfollower.modele.Horaire;
 import studentfollower.modele.Professeur;
 
@@ -65,12 +67,49 @@ public class CoursDAO extends DAO<Cours> {
 						DAOFactory.getGroupeDAO().find(result.getInt("num_groupe")),
 						DAOFactory.getProfesseurDAO().find(result.getInt("num_prof")),
 						DAOFactory.getHoraireDAO().find(result.getInt("num_horaire")));
-				System.out.println(cours.getMatiere());
 			}
 				
 		} catch(Exception e){
 		}
 		return cours;	
+	}
+
+	public ArrayList<Cours> findByGroupeAndProf(Groupe groupe, Professeur prof) {
+		ArrayList<Cours> cours = new ArrayList<Cours>();
+		try{
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_READ_ONLY).executeQuery(
+					"SELECT * FROM Cours WHERE num_prof=" + prof.getNum_prof() + " AND num_groupe=" + groupe.getNum_groupe());
+			while(result.next()){
+				cours.add(new Cours(result.getInt("num_cours"), 
+						result.getString("matiere"), 
+						result.getString("salle"), 
+						DAOFactory.getGroupeDAO().find(result.getInt("num_groupe")),
+						DAOFactory.getProfesseurDAO().find(result.getInt("num_prof")),
+						DAOFactory.getHoraireDAO().find(result.getInt("num_horaire"))));
+			}
+				
+		} catch(Exception e){
+		}
+		return cours;
+	}
+
+	public ArrayList<Cours> findByProf(Professeur prof) {
+		ArrayList<Cours> cours = new ArrayList<Cours>();
+		try{
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_READ_ONLY).executeQuery(
+					"SELECT * FROM Cours WHERE num_prof=" + prof.getNum_prof());
+			while(result.next()){
+				cours.add(new Cours(result.getInt("num_cours"), 
+						result.getString("matiere"), 
+						result.getString("salle"), 
+						DAOFactory.getGroupeDAO().find(result.getInt("num_groupe")),
+						DAOFactory.getProfesseurDAO().find(result.getInt("num_prof")),
+						DAOFactory.getHoraireDAO().find(result.getInt("num_horaire"))));
+			}
+				
+		} catch(Exception e){
+		}
+		return cours;
 	}
 
 }

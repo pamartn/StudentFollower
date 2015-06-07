@@ -1,41 +1,42 @@
 package studentfollower.views;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
-import studentfollower.modele.Cours;
 import studentfollower.modele.Etudiant;
-import studentfollower.modele.Groupe;
-import studentfollower.modele.dao.DAOFactory;
 import studentfollower.views.components.BoutonEtudiant;
 
 public class EtudiantListView extends ListView {
 
 	private String matiere;
 	private char groupe;
-	ArrayList<BoutonEtudiant> listBoutons;
-	String[] nomsEtu;
+	HashMap<BoutonEtudiant, Etudiant> listBoutons;
 	JScrollPane scroll;
 
-	public EtudiantListView(Cours cours) {
+	public EtudiantListView() {
 		super();
-		
-		listBoutons = new ArrayList<BoutonEtudiant>();
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		if(cours != null){
-			ArrayList<Etudiant> etudiants = (ArrayList<Etudiant>) DAOFactory.getEtudiantDAO().findAllByGroupe(cours.getGroupe());
+	}
+	
+	public void loadUI(List<Etudiant> etudiants, boolean appel){
+		removeAll();
+		invalidate();
+		revalidate();
+		if(etudiants != null && etudiants.size() > 0){
+			listBoutons = new HashMap<BoutonEtudiant,Etudiant>();
 			for(Etudiant e : etudiants){
-				BoutonEtudiant b = new BoutonEtudiant(e.getNom() + " " + e.getPrenom(), true);
-				listBoutons.add(b);
+				BoutonEtudiant b = new BoutonEtudiant(e.getNom() + " " + e.getPrenom(), appel);
+				listBoutons.put(b,e);
 				add(b);
 			}
 		} else {
 			add(new JLabel("Vous n'avez pas cours"));
 		}
-		
+		repaint();
 	}
 }

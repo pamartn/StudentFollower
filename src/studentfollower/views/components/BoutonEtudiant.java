@@ -31,16 +31,16 @@ public class BoutonEtudiant extends JPanel {
 		add(bWest, BorderLayout.WEST);
 		
 		bMilieu = new JButton(etudiant);
-		bMilieu.addActionListener(new CustomListener());
 		add(bMilieu, BorderLayout.CENTER);
-		if(appel){
-			bEast = new JButton();
-			bEast.setSize(new Dimension(40,40));
-			bEast.setBackground(Color.green);
-			bEast.addActionListener(new CustomListener());
-			add(bEast, BorderLayout.EAST);
-		}
+		bEast = new JButton();
+		bEast.setSize(new Dimension(40,40));
+		bEast.addActionListener(new CustomListener());
+		add(bEast, BorderLayout.EAST);
 		
+		if(appel){
+			bMilieu.setBackground(Color.green);
+			bMilieu.addActionListener(new CustomListener());
+		}
 		
 		commentaire = new BoutonCommentaire();
 		commentaire.setVisible(false);
@@ -57,13 +57,13 @@ public class BoutonEtudiant extends JPanel {
 	}
 
 	private void changeStateColor() {
-		bEast.setBackground(colorList[state]);
+		bMilieu.setBackground(colorList[state]);
 	}
 	
 	public class CustomListener implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == bEast){
+			if(e.getSource() == bMilieu){
 				state = state < colorList.length-1 ? state +1 : 0;
 				changeStateColor();
 				if(colorList[state] == Color.orange){
@@ -72,7 +72,7 @@ public class BoutonEtudiant extends JPanel {
 					commentaire.setRetard(0);
 				}
 				
-			} else if (e.getSource() == bMilieu){
+			} else if (e.getSource() == bEast){
 				commentaire.setVisible(!commentaire.isVisible());
 			}
 			
