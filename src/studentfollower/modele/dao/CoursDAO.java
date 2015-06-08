@@ -106,6 +106,7 @@ public class CoursDAO extends DAO<Cours> {
 						DAOFactory.getProfesseurDAO().find(result.getInt("num_prof")),
 						DAOFactory.getHoraireDAO().find(result.getInt("num_horaire"))));
 			}
+			
 				
 		} catch(Exception e){
 		}

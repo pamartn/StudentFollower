@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import studentfollower.controller.FenetreController;
+import studentfollower.views.Fenetre;
+
 
 public class BoutonEtudiant extends JPanel {
 
@@ -32,12 +35,22 @@ public class BoutonEtudiant extends JPanel {
 		
 		bMilieu = new JButton(etudiant);
 		add(bMilieu, BorderLayout.CENTER);
-		bEast = new JButton();
+		bMilieu.setFont(bMilieu.getFont().deriveFont((float)FenetreController.scale*15f));
+		ImageIcon img2 = new ImageIcon("res/down.png");
+		bEast = new JButton(new ImageIcon(img2.getImage().getScaledInstance( 40, 40, java.awt.Image.SCALE_SMOOTH)));
 		bEast.setSize(new Dimension(40,40));
 		bEast.addActionListener(new CustomListener());
 		add(bEast, BorderLayout.EAST);
 		
+		bEast.setBackground(Color.white);
+		bEast.setForeground(Fenetre.blueColor);
+		bWest.setBackground(Color.WHITE);
+		bMilieu.setBackground(Color.WHITE);
+		bMilieu.setForeground(Fenetre.blueColor);
+		
+		bWest.setForeground(Fenetre.blueColor);
 		if(appel){
+			bMilieu.setForeground(Color.white);
 			bMilieu.setBackground(Color.green);
 			bMilieu.addActionListener(new CustomListener());
 		}

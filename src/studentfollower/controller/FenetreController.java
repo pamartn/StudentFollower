@@ -33,16 +33,6 @@ public class FenetreController {
 		
 		fenetre.loadUI(navBarController.getView(),midViewControl.getView(), footerBarControl.getView());
 	}
-	
-	
-	
-	public void actionCours(){
-		
-	}
-	
-	public void actionGroupe(){
-		
-	}
 
 	
 	public static void main(String args[]){

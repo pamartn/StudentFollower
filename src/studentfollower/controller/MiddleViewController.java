@@ -3,8 +3,6 @@ package studentfollower.controller;
 import studentfollower.modele.Cours;
 import studentfollower.modele.Groupe;
 import studentfollower.modele.Professeur;
-import studentfollower.modele.dao.DAOFactory;
-import studentfollower.views.EtudiantListView;
 import studentfollower.views.MiddleView;
 
 public class MiddleViewController {

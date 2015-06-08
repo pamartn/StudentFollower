@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import studentfollower.modele.Etudiant;
@@ -27,16 +28,20 @@ public class EtudiantListView extends ListView {
 		removeAll();
 		invalidate();
 		revalidate();
+		JPanel p = new JPanel();
+		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 		if(etudiants != null && etudiants.size() > 0){
 			listBoutons = new HashMap<BoutonEtudiant,Etudiant>();
 			for(Etudiant e : etudiants){
 				BoutonEtudiant b = new BoutonEtudiant(e.getNom() + " " + e.getPrenom(), appel);
 				listBoutons.put(b,e);
-				add(b);
+				p.add(b);
 			}
 		} else {
 			add(new JLabel("Vous n'avez pas cours"));
 		}
+		scroll = new JScrollPane(p);
+		add(scroll);
 		repaint();
 	}
 }

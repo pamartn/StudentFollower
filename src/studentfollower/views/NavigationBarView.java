@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -38,17 +40,25 @@ public class NavigationBarView extends JPanel {
 		super();
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
+		
 		imgHome = new ImageIcon("res/homeicon.png");
+		
 		home = new JButton(new ImageIcon(imgHome.getImage().getScaledInstance( 40, 40, java.awt.Image.SCALE_SMOOTH )));
 		
-		ImageIcon imgSearch = new ImageIcon("res/search.png");
+		ImageIcon imgSearch;
+		imgSearch = new ImageIcon("res/search.png");
 		search = new JButton(new ImageIcon(imgSearch.getImage().getScaledInstance( 40, 40, java.awt.Image.SCALE_SMOOTH )));
+	
+		setBackground(Color.WHITE);
+		home.setBackground(Fenetre.blueColor);
+		search.setBackground(Fenetre.blueColor);
+		search.addActionListener(new SearchListener());
 		
 		
 		textField = new JTextField();
-		textField.setBorder(BorderFactory.createLineBorder(Color.RED, 10));
+		textField.setBorder(BorderFactory.createLineBorder(Fenetre.blueColor, 10));
 		textField.setFont(new CustomFont());
-		textField.setText("search");
+		textField.setText("rechercher");
 		
 		setVisible(true);
 	}
@@ -64,9 +74,12 @@ public class NavigationBarView extends JPanel {
 		nom = new JLabel(prof.getPrenom() +" "+ prof.getNom(), SwingConstants.CENTER);
 		nom.setFont(nom.getFont().deriveFont(20f * (float)FenetreController.scale));
 		
+		nom.setOpaque(true);
+		nom.setBackground(Fenetre.blueColor);
+		nom.setForeground(Color.white);
 		add(home, BorderLayout.WEST);
+
 		add(nom, BorderLayout.CENTER);
-		search.addActionListener(new SearchListener());
 		add(search,BorderLayout.EAST);
 		textField.addKeyListener(textL);
 		textField.addMouseListener(new MouseListener() {
@@ -100,18 +113,17 @@ public class NavigationBarView extends JPanel {
 				textField.setText("");
 			}
 		});
+		JLabel info;
 		try{
-			String dateD = cours.getHoraire().getDate_debut().getHours()+":"+
-					cours.getHoraire().getDate_debut().getMinutes();
-			String dateF = cours.getHoraire().getDate_fin().getHours()+":"+
-					cours.getHoraire().getDate_fin().getMinutes();
-			
-			add(new JLabel(cours.getMatiere() + " en salle " + cours.getSalle() + " de " + dateD + " à " + dateF, SwingConstants.CENTER), BorderLayout.SOUTH);
-			
+			info = new JLabel(cours.getMatiere() + " en salle " + cours.getSalle() + " de " + cours.getHoraire().getHeureDebut() + " à " + cours.getHoraire().getHeureFin(), SwingConstants.CENTER);
 		} catch(Exception e){
-			add(new JLabel("Aucun cours sélectionné", SwingConstants.CENTER),BorderLayout.SOUTH);
-			
+			info = new JLabel("Aucun cours sélectionné", SwingConstants.CENTER);
 		}
+		info.setFont(info.getFont().deriveFont((float)FenetreController.scale*10f));
+		info.setForeground(Color.WHITE);
+		info.setOpaque(true);
+		info.setBackground(Fenetre.blueColor);
+		add(info, BorderLayout.SOUTH);
 
 		repaint();
 	}
@@ -121,9 +133,25 @@ public class NavigationBarView extends JPanel {
 	public class SearchListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			nom.setVisible(false);
-			add(textField,BorderLayout.CENTER);
-			repaint();
+				if(nom.isVisible()){
+					textField.setVisible(true);
+
+					System.out.println("ouvert");
+					add(textField,BorderLayout.CENTER);
+					textField.setFocusable(true);
+					nom.setVisible(false);
+					textField.repaint();
+					repaint();
+				} else {
+					System.out.println("ferme");
+					
+					textField.setVisible(false);
+					textField.setText("rechercher");
+					textField.setFocusable(false);
+					nom.setVisible(true);
+					repaint();
+				}
+			
 		}
 		
 	}

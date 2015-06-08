@@ -44,11 +44,12 @@ public class CoursListController {
 
 	public void showSearch(String searchText) {
 		ArrayList<Cours> searchResult=new ArrayList<Cours>();
-		searchText = searchText.toLowerCase();
+		searchText = new String(searchText).toLowerCase();
 		
 		for(Cours c : listCours){
 			String text = c.getMatiere()+c.getSalle()+c.getHoraire().getHeureDebut()+c.getHoraire().getHeureFin();
-			if(searchText.length() == 0 || searchText.contains(text.toLowerCase())){
+			text = text.toLowerCase();
+			if(searchText.length() == 0 || text.contains(searchText)){
 				searchResult.add(c);
 			}
 		}

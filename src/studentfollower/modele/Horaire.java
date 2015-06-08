@@ -1,19 +1,19 @@
 package studentfollower.modele;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Calendar;
 
 public class Horaire {
 
 	private int num_horaire;
-	private Date date_debut;
-	private Date date_fin;
+	private Calendar Calendar_debut;
+	private Calendar Calendar_fin;
 	
 	
-	public Horaire(int num_horaire, Date dateDebut,Date dateFin){
+	public Horaire(int num_horaire, Calendar CalendarDebut,Calendar CalendarFin){
 		setNum_horaire(num_horaire);
-		setDate_debut(dateDebut);
-		setDate_fin(dateFin);
+		setCalendar_debut(CalendarDebut);
+		setCalendar_fin(CalendarFin);
 	}
 
 	public int getNum_horaire() {
@@ -26,29 +26,33 @@ public class Horaire {
 	}
 
 
-	public Date getDate_debut() {
-		return date_debut;
+	public Calendar getCalendar_debut() {
+		return Calendar_debut;
 	}
 
 
-	public void setDate_debut(Date dateDebut) {
-		this.date_debut = dateDebut;
+	public void setCalendar_debut(Calendar CalendarDebut) {
+		this.Calendar_debut = CalendarDebut;
 	}
 
 
-	public Date getDate_fin() {
-		return date_fin;
+	public Calendar getCalendar_fin() {
+		return Calendar_fin;
 	}
 
 
-	public void setDate_fin(Date dateFin) {
-		this.date_fin = dateFin;
+	public void setCalendar_fin(Calendar CalendarFin) {
+		this.Calendar_fin = CalendarFin;
 	}
 
 	public String getHeureFin() {
-		return date_fin.getHours() + ":" +date_fin.getMinutes();
+		return Calendar_fin.get(Calendar.HOUR_OF_DAY) +":" +Calendar_fin.get(Calendar.MINUTE);
 	}
 	public String getHeureDebut() {
-		return date_debut.getHours() +":"+ date_debut.getMinutes();
+		return Calendar_debut.get(Calendar.HOUR_OF_DAY)+":"+ Calendar_debut.get(Calendar.MINUTE);
+	}
+
+	public boolean inferiorTo(Horaire h) {
+		return h.getCalendar_debut().before(getCalendar_debut());
 	}
 }
